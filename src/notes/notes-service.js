@@ -9,11 +9,15 @@ const NotesService = {
     return knex('notes').where({id}).first('*');
   },
 
-  insert(knex, folder) {
+  insert(knex, note) {
     return knex('notes')
-      .insert(folder)
+      .insert(note)
       .returning('*')
       .then(rows => rows[0]);
+  },
+
+  delete(knex, id) {
+    return knex('notes').where({id}).delete();
   }
 };
 

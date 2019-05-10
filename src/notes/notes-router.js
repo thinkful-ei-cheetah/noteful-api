@@ -57,6 +57,14 @@ notesRouter
   })
   .get((req, res, next) => {
     res.json(res.note);
+  })
+  .delete(async (req, res, next) => {
+    try {
+      await NotesService.delete(req.app.get('db'), req.params.note_id);
+      res.status(200).json({});
+    } catch(err) {
+      next(err);
+    }
   });
   
 
